@@ -56,7 +56,7 @@ signUpRouter.post(
   },
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/log-in/failure",
+    failureRedirect: "/",
     failureMessage: true,
   }),
 );
