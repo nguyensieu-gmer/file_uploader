@@ -4,14 +4,14 @@ const uploadFileView = "home";
 const upload = require("../lib/multer");
 const prisma = require("../lib/prisma");
 
-uploadRouter.get("/", (req, res) => {
-  console.log("in upload page");
-  res.render(uploadFileView);
-});
+// uploadRouter.get("/", (req, res) => {
+//   console.log("in upload page");
+//   res.render(uploadFileView);
+// });
 uploadRouter.post("/", upload.single("file_upload"), async (req, res) => {
   const createDoc = await prisma.document.create({
     data: {
-      userId: 1, // notice: req.user.id: user has been authenticated
+      userId: req.user.id, // notice: when use folder. This pot will be folder id
       size: req.file.size,
       originalname: req.file.originalname,
       path: req.file.path,
