@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const uploadRouter = Router();
-const uploadFileView = "uploadFile";
+const uploadFileView = "home";
 const upload = require("../lib/multer");
 const prisma = require("../lib/prisma");
 
