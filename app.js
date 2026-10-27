@@ -20,6 +20,10 @@ app.set("view engine", "ejs");
 
 const uploadRouter = require("./router/uploadRouter");
 const signUpRouter = require("./router/signUpRouter");
+const logInRouter = require("./router/logInRouter");
+
+const homeController = require("./controller/homeController");
+const logOutController = require("./controller/logOutController");
 
 // set up session store
 const sessionStore = new PrismaSessionStore(prisma, {
@@ -52,11 +56,11 @@ app.use((req, res, next) => {
 });
 
 // routers
-app.get("/", (req, res) => {
-  res.render("home");
-});
+app.get("/", homeController);
 app.use("/upload", uploadRouter);
 app.use("/sign-up", signUpRouter);
+app.use("/log-in", logInRouter);
+app.get("/log-out", logOutController);
 
 app.listen(PORT, (err) => {
   if (err) {
