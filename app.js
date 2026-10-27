@@ -19,6 +19,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 const uploadRouter = require("./router/uploadRouter");
+const signUpRouter = require("./router/signUpRouter");
 
 // set up session store
 const sessionStore = new PrismaSessionStore(prisma, {
@@ -52,9 +53,10 @@ app.use((req, res, next) => {
 
 // routers
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.render("home");
 });
 app.use("/upload", uploadRouter);
+app.use("/sign-up", signUpRouter);
 
 app.listen(PORT, (err) => {
   if (err) {
