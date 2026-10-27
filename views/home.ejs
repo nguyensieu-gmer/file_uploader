@@ -6,7 +6,13 @@
     <title>Document</title>
   </head>
   <body>
-    <a href="/sign-up">sign up</a>
+    <% if (user){%>
+      <p>hello <%= user.name%></p>
+      <a href="log-out">log out</a>
+    <%} else {%>
+      <a href="/sign-up">sign up</a>
+      <a href="/log-in">log in</a>
+    <%}%>
     <h1>Home page</h1>
     <%- include('partials/uploadFile')%>
   </body>
