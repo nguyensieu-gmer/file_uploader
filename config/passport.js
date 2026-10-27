@@ -13,7 +13,7 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Incorrect user name" });
       }
-      const match = bcript.compare(password, user.password);
+      const match = await bcript.compare(password, user.password);
       if (!match) {
         return done(null, false, { message: "Incorrect password" });
       }
