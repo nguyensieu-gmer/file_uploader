@@ -4,6 +4,7 @@ const app = express();
 const path = require("node:path");
 const passport = require("./config/passport");
 const prisma = require("./lib/prisma");
+const isAuth = require("./config/isAuth");
 
 const session = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
@@ -21,9 +22,12 @@ app.set("view engine", "ejs");
 const uploadRouter = require("./router/uploadRouter");
 const signUpRouter = require("./router/signUpRouter");
 const logInRouter = require("./router/logInRouter");
+const folderRouter = require("./router/folderRouter");
 
 const homeController = require("./controller/homeController");
 const logOutController = require("./controller/logOutController");
+
+const authErrorView = "authError";
 
 // set up session store
 const sessionStore = new PrismaSessionStore(prisma, {
@@ -61,6 +65,18 @@ app.use("/upload", uploadRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);
 app.get("/log-out", logOutController);
+app.use("/folder", isAuth, folderRouter);
+
+// authentication error handler
+app.use((err, req, res, next) => {
+  console.log(err);
+  if (err.statusCode === 401 && err.name === "Authenticated Error") {
+    return res
+      .status(err.statusCode)
+      .render(authErrorView, { message: err.message, name: error.name });
+  }
+  next();
+});
 
 app.listen(PORT, (err) => {
   if (err) {
