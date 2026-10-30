@@ -73,7 +73,7 @@ app.use((err, req, res, next) => {
   if (err.statusCode === 401 && err.name === "Authenticated Error") {
     return res
       .status(err.statusCode)
-      .render(authErrorView, { message: err.message, name: error.name });
+      .render(authErrorView, { message: err.message, name: err.name });
   }
   next();
 });
