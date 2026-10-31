@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="/">go home</a>
+    <br>
+    <a href="/upload/file/<%= folderId%>">Upload file</a>
+    <h1><%= name%></h1>
+    <% if (locals.documents){%>
+        <% documents.forEach(doc => { %>
+            <li>
+                <p>Created at: <%= doc.createAt%></p>
+                <p>Size: <%= doc.size%></p>
+                <p>Name: <%= name%>/<%= doc.originalname%></p>
+                <form action="/upload/delete/<%= doc.id%>/folder/<%= folderId%>" method="post">
+                  <input type="hidden" name="filename" value="<%= doc.filename%>">
+                  <button type="submit">Delete</button>
+                </form>
+                <form action="/upload/download/<%= doc.id%>/folder/<%= folderId%>" method="post">
+                  <input type="hidden" name="filename" value="<%= doc.filename%>">
+                  <button type="submit">Download</button>
+                </form>
+            </li>
+        <%})%>
+    <%}%>
+  </body>
+</html>

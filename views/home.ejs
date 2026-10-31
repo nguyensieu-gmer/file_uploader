@@ -20,6 +20,7 @@
         <% locals.userFolders.forEach(folder => {%>
           <li>
             <span><%= folder.name%></span>     
+            <a href="folder/view/<%= folder.id%>">view files</a>
             <a href="folder/update/<%= folder.id%>">update</a>
             <form action="folder/delete/<%= folder.id%>" method="post"><button type="submit">delete</button></form>
           </li>
