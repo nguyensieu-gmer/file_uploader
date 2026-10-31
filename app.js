@@ -61,21 +61,17 @@ app.use((req, res, next) => {
 
 // routers
 app.get("/", homeController);
-app.use("/upload", uploadRouter);
+app.use("/upload", isAuth, uploadRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/log-in", logInRouter);
 app.get("/log-out", logOutController);
 app.use("/folder", isAuth, folderRouter);
 
-// authentication error handler
+// error handle for custom error
 app.use((err, req, res, next) => {
-  console.log(err);
-  if (err.statusCode === 401 && err.name === "Authenticated Error") {
-    return res
-      .status(err.statusCode)
-      .render(authErrorView, { message: err.message, name: err.name });
-  }
-  next();
+  return res
+    .status(err.statusCode)
+    .render(authErrorView, { message: err.message, name: err.name });
 });
 
 app.listen(PORT, (err) => {
