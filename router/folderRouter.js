@@ -3,6 +3,7 @@ const folderRouter = Router();
 const { matchedData, body, validationResult } = require("express-validator");
 const addFolderView = "addFolder";
 const updateFolderView = "updateFolder";
+const filesView = "files";
 const prisma = require("../lib/prisma");
 
 const validate = [
@@ -60,7 +61,6 @@ folderRouter.post("/update/:folderId", validate, async (req, res) => {
       .render(updateFolderView, { errors: results.array() });
   }
   const { foldername } = matchedData(req);
-  console.log(foldername);
   await prisma.folder.update({
     where: { id: 1 * req.params.folderId },
     data: {
@@ -68,6 +68,21 @@ folderRouter.post("/update/:folderId", validate, async (req, res) => {
     },
   });
   res.redirect("/");
+});
+
+folderRouter.get("/view/:folderId", async (req, res) => {
+  const folderId = req.params.folderId;
+  const [fileList] = await prisma.folder.findMany({
+    where: { userId: req.user.id, id: 1 * folderId },
+    include: {
+      documents: true,
+    },
+  });
+  res.render(filesView, {
+    name: fileList.name,
+    folderId,
+    documents: fileList.documents,
+  });
 });
 
 module.exports = folderRouter;
