@@ -16,12 +16,17 @@
                 <p>Created at: <%= doc.createAt%></p>
                 <p>Size: <%= doc.size%></p>
                 <p>Name: <%= name%>/<%= doc.originalname%></p>
+                <p>Document link: <a href="<%= doc.doc_link%>">link</a></p>
                 <form action="/upload/delete/<%= doc.id%>/folder/<%= folderId%>" method="post">
                   <input type="hidden" name="filename" value="<%= doc.filename%>">
+                  <input type="hidden" name="public_id" value="<%= doc.public_id%>">
+                  <input type="hidden" name="resource_type" value="<%= doc.resource_type%>">
                   <button type="submit">Delete</button>
                 </form>
                 <form action="/upload/download/<%= doc.id%>/folder/<%= folderId%>" method="post">
                   <input type="hidden" name="filename" value="<%= doc.filename%>">
+                  <input type="hidden" name="public_id" value="<%= doc.public_id%>">
+                  <input type="hidden" name="resource_type" value="<%= doc.resource_type%>">
                   <button type="submit">Download</button>
                 </form>
             </li>
