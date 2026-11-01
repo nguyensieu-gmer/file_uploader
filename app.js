@@ -70,7 +70,7 @@ app.use("/folder", isAuth, folderRouter);
 // error handle for custom error
 app.use((err, req, res, next) => {
   return res
-    .status(err.statusCode)
+    .status(err.statusCode || 404)
     .render(authErrorView, { message: err.message, name: err.name });
 });
 
