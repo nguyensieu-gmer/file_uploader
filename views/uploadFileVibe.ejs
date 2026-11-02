@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload File | FileVault</title>
+
+    <link rel="stylesheet" href="/styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <main class="upload-container">
+      <section class="upload-card">
+        <header class="upload-header">
+          <a href="/" class="upload-back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to home
+          </a>
+
+          <div class="upload-icon">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+
+          <p class="eyebrow">FILE MANAGEMENT</p>
+
+          <h1>Upload your file</h1>
+
+          <p class="upload-description">
+            Store your documents safely and keep everything organized with
+            FileVault.
+          </p>
+        </header>
+
+        <form
+          class="upload-form"
+          action="/upload/<%= folderId %>"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <label for="file" class="file-drop-area">
+            <div class="file-drop-icon">
+              <i class="fa-solid fa-file-arrow-up"></i>
+            </div>
+
+            <span class="file-drop-title">Choose a file to upload</span>
+
+            <span class="file-drop-description">
+              Click here to browse your device
+            </span>
+
+            <span class="file-name" id="file-name"> No file selected </span>
+
+            <input type="file" name="file_upload" id="file" required />
+          </label>
+
+          <button type="submit" class="upload-submit-btn">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            Upload file
+          </button>
+        </form>
+
+        <a href="/" class="upload-cancel-link">Cancel</a>
+      </section>
+
+      <footer class="upload-footer">
+        <i class="fa-solid fa-shield-halved"></i>
+        Your files are safe with FileVault.
+      </footer>
+    </main>
+
+    <script>
+      const fileInput = document.querySelector("#file");
+      const fileName = document.querySelector("#file-name");
+
+      fileInput.addEventListener("change", () => {
+        fileName.textContent = fileInput.files.length
+          ? fileInput.files[0].name
+          : "No file selected";
+      });
+    </script>
+  </body>
+</html>

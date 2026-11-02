@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Folder | FileVault</title>
+
+    <link rel="stylesheet" href="/styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <main class="create-folder-container">
+      <section class="create-folder-card">
+        <header class="create-folder-header">
+          <a href="/" class="create-folder-back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to home
+          </a>
+
+          <div class="create-folder-icon">
+            <i class="fa-solid fa-folder-plus"></i>
+          </div>
+
+          <p class="eyebrow">FOLDER MANAGEMENT</p>
+
+          <h1>Create a folder</h1>
+
+          <p class="create-folder-description">
+            Create a new folder to organize your files and keep everything in
+            one place.
+          </p>
+        </header>
+
+        <div class="create-folder-body">
+          <%- include('partials/errors') %>
+
+          <form action="/folder/add" method="post">
+            <div class="form-group">
+              <label for="name"> Folder's name <span>*</span> </label>
+
+              <div class="input-wrapper">
+                <i class="fa-solid fa-folder"></i>
+
+                <input
+                  type="text"
+                  name="foldername"
+                  id="name"
+                  placeholder="Enter your folder name"
+                  required
+                  autofocus
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="create-folder-submit-btn">
+              Create folder
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+
+          <a href="/" class="create-folder-cancel-link"> Cancel </a>
+        </div>
+      </section>
+
+      <footer class="create-folder-footer">
+        <i class="fa-solid fa-shield-halved"></i>
+        Your files are safe with FileVault.
+      </footer>
+    </main>
+  </body>
+</html>

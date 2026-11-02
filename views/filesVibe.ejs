@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= name %> | FileVault</title>
+
+    <link rel="stylesheet" href="/styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <main class="folder-details-container">
+      <!-- Top navigation -->
+      <header class="folder-details-navbar">
+        <a href="/" class="folder-home-link">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back to home
+        </a>
+
+        <a href="/upload/file/<%= folderId %>" class="upload-file-btn">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          Upload file
+        </a>
+      </header>
+
+      <!-- Folder heading -->
+      <section class="folder-details-header">
+        <div class="folder-details-heading">
+          <div class="folder-details-icon">
+            <i class="fa-solid fa-folder-open"></i>
+          </div>
+
+          <div>
+            <p class="eyebrow">YOUR STORAGE</p>
+            <h1><%= name %></h1>
+            <p class="folder-details-subtitle">
+              Manage and organize the files in this folder.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Documents -->
+      <section class="documents-section">
+        <div class="documents-section-header">
+          <div>
+            <h2>Files</h2>
+            <p>Your uploaded documents</p>
+          </div>
+        </div>
+
+        <% if (locals.documents && documents.length > 0) { %>
+          <div class="documents-list">
+            <% documents.forEach(doc => { %>
+              <article class="document-card">
+                <div class="document-icon">
+                  <i class="fa-solid fa-file-lines"></i>
+                </div>
+
+                <div class="document-info">
+                  <h3><%= doc.originalname %></h3>
+
+                  <div class="document-metadata">
+                    <span>
+                      <i class="fa-regular fa-calendar"></i>
+                      <p>Created at: <%= new Date(doc.createAt).toISOString().split('T')[0] %></p>
+                    </span>
+
+                    <span>
+                      <i class="fa-solid fa-database"></i>
+                        <p>Size: <%= (doc.size / (1024 * 1024)).toFixed(2) %> MB</p>
+                    </span>
+                  </div>
+
+                  <a
+                    href="<%= doc.doc_link %>"
+                    class="document-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    View document
+                  </a>
+                </div>
+
+                <div class="document-actions">
+                  <form
+                    action="/upload/download/<%= doc.id %>/folder/<%= folderId %>"
+                    method="post"
+                  >
+                    <input
+                      type="hidden"
+                      name="filename"
+                      value="<%= doc.filename %>"
+                    />
+                    <input
+                      type="hidden"
+                      name="public_id"
+                      value="<%= doc.public_id %>"
+                    />
+                    <input
+                      type="hidden"
+                      name="resource_type"
+                      value="<%= doc.resource_type %>"
+                    />
+
+                    <button type="submit" class="document-action-btn download-btn">
+                      <i class="fa-solid fa-download"></i>
+                      Download
+                    </button>
+                  </form>
+
+                  <form
+                    action="/upload/delete/<%= doc.id %>/folder/<%= folderId %>"
+                    method="post"
+                  >
+                    <input
+                      type="hidden"
+                      name="filename"
+                      value="<%= doc.filename %>"
+                    />
+                    <input
+                      type="hidden"
+                      name="public_id"
+                      value="<%= doc.public_id %>"
+                    />
+                    <input
+                      type="hidden"
+                      name="resource_type"
+                      value="<%= doc.resource_type %>"
+                    />
+
+                    <button type="submit" class="document-action-btn delete-btn">
+                      <i class="fa-solid fa-trash"></i>
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </article>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <div class="empty-documents">
+            <div class="empty-documents-icon">
+              <i class="fa-regular fa-folder-open"></i>
+            </div>
+
+            <h3>This folder is empty</h3>
+            <p>You haven't uploaded any files here yet.</p>
+
+            <a href="/upload/file/<%= folderId %>" class="empty-upload-btn">
+              <i class="fa-solid fa-plus"></i>
+              Upload your first file
+            </a>
+          </div>
+        <% } %>
+      </section>
+
+      <footer class="folder-details-footer">
+        <i class="fa-solid fa-shield-halved"></i>
+        Your files are safe with FileVault.
+      </footer>
+    </main>
+  </body>
+</html>

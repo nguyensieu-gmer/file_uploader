@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up | FileVault</title>
+
+    <link rel="stylesheet" href="/styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <main class="signup-container">
+      <!-- Left decoration -->
+      <section class="signup-decoration">
+        <a href="/" class="logo">
+          <i class="fa-solid fa-cloud"></i>
+          <span>FileVault</span>
+        </a>
+
+        <div class="decoration-content">
+          <div class="decoration-icon">
+            <i class="fa-solid fa-folder-open"></i>
+          </div>
+
+          <h1>Your files,<br />your own space.</h1>
+
+          <p>
+            Keep your documents organized, secure and accessible whenever you
+            need them.
+          </p>
+        </div>
+
+        <div class="decoration-footer">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>A simple place for all your files.</span>
+        </div>
+      </section>
+
+      <!-- Right form -->
+      <section class="signup-form-section">
+        <div class="signup-card">
+          <div class="form-heading">
+            <p class="eyebrow">GET STARTED</p>
+            <h2>Create an account</h2>
+            <p>Join FileVault and organize your files.</p>
+          </div>
+
+          <%- include('partials/errors') %>
+
+          <form action="" method="post">
+            <div class="form-group">
+              <label for="name">User name <span>*</span></label>
+
+              <div class="input-wrapper">
+                <i class="fa-solid fa-user"></i>
+                <input
+                  type="text"
+                  name="username"
+                  id="name"
+                  placeholder="Enter your username"
+                  autocomplete="username"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">User email <span>*</span></label>
+
+              <div class="input-wrapper">
+                <i class="fa-solid fa-envelope"></i>
+                <input
+                  type="email"
+                  name="useremail"
+                  id="email"
+                  placeholder="Enter your email"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password <span>*</span></label>
+
+              <div class="input-wrapper">
+                <i class="fa-solid fa-lock"></i>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Create a password"
+                  autocomplete="new-password"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm">Confirm password <span>*</span></label>
+
+              <div class="input-wrapper">
+                <i class="fa-solid fa-lock"></i>
+                <input
+                  type="password"
+                  name="confirm"
+                  id="confirm"
+                  placeholder="Confirm your password"
+                  autocomplete="new-password"
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              Create account
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+
+          <div class="form-footer">
+            <p>
+              Already have an account?
+              <a href="/log-in">Log in</a>
+            </p>
+          </div>
+
+          <a href="/" class="back-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to home
+          </a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | File Manager</title>
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-content">
+
+            <a href="/" class="logo">
+                <i class="fa-solid fa-cloud"></i>
+                <h2>FileVault</h2>
+            </a>
+
+            <nav class="sidebar-nav">
+                <a href="/" class="nav-item active">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </a>
+
+                <a href="/folder" class="nav-item">
+                    <i class="fa-solid fa-folder-plus"></i>
+                    <span>Add folder</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Your files are safe</span>
+            </div>
+
+        </div>
+    </aside>
+
+
+    <!-- Main dashboard -->
+    <main class="dashboard">
+
+        <!-- Navbar -->
+        <header class="navbar">
+
+            <div class="welcome">
+                <% if (user) { %>
+                    <span>Welcome back,</span>
+                    <strong><%= user.name %></strong>
+                <% } else { %>
+                    <span>Welcome to FileVault</span>
+                <% } %>
+            </div>
+
+            <div class="navbar-actions">
+                <% if (user) { %>
+                    <a href="/log-out" class="auth-btn logout-btn">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Log out
+                    </a>
+                <% } else { %>
+                    <a href="/sign-up" class="auth-btn signup-btn">Sign up</a>
+                    <a href="/log-in" class="auth-btn login-btn">Log in</a>
+                <% } %>
+            </div>
+
+        </header>
+
+
+        <!-- Content -->
+        <section class="content-area">
+
+            <div class="page-heading">
+                <div>
+                    <p class="subtitle">YOUR PERSONAL STORAGE</p>
+                    <h1>My Folders</h1>
+                    <p class="description">
+                        Organize your files and keep everything in one place.
+                    </p>
+                </div>
+
+                <a href="/folder" class="add-folder-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    New folder
+                </a>
+            </div>
+
+
+            <!-- Folder section -->
+            <section class="folder-section">
+
+                <div class="section-heading">
+                    <h2>All folders</h2>
+
+                    <% if (locals.userFolders) { %>
+                        <span class="folder-count">
+                            <%= userFolders.length %> folders
+                        </span>
+                    <% } %>
+                </div>
+
+
+                <% if (locals.userFolders && userFolders.length > 0) { %>
+
+                    <div class="folder-grid">
+
+                        <% userFolders.forEach(folder => { %>
+
+                            <article class="folder-card">
+
+                                <div class="folder-card-top">
+                                    <div class="folder-icon">
+                                        <i class="fa-solid fa-folder"></i>
+                                    </div>
+
+                                    <span class="folder-status">Folder</span>
+                                </div>
+
+                                <div class="folder-info">
+                                    <h3><%= folder.name %></h3>
+                                    <p>Your personal collection</p>
+                                </div>
+
+                                <div class="folder-actions">
+
+                                    <a href="/folder/view/<%= folder.id %>"
+                                       class="action-btn view-btn">
+                                        <i class="fa-solid fa-eye"></i>
+                                        View
+                                    </a>
+
+                                    <a href="/folder/update/<%= folder.id %>"
+                                       class="action-btn update-btn">
+                                        <i class="fa-solid fa-pen"></i>
+                                        Edit
+                                    </a>
+
+                                    <form action="/folder/delete/<%= folder.id %>"
+                                          method="post"
+                                          onsubmit="return confirm('Are you sure you want to delete this folder?')">
+
+                                        <button type="submit"
+                                                class="action-btn delete-btn">
+                                            <i class="fa-solid fa-trash"></i>
+                                            Delete
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </article>
+
+                        <% }) %>
+
+                    </div>
+
+                <% } else { %>
+
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+
+                        <h3>No folders yet</h3>
+
+                        <p>
+                            You haven't created any folders.
+                            Start organizing your files today!
+                        </p>
+
+                        <a href="/folder" class="add-folder-btn">
+                            <i class="fa-solid fa-plus"></i>
+                            Create your first folder
+                        </a>
+                    </div>
+
+                <% } %>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
