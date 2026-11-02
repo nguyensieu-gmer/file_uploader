@@ -3,6 +3,7 @@ const addFolderView = "addFolder";
 const updateFolderView = "updateFolder";
 const filesView = "files";
 const prisma = require("../lib/prisma");
+const FileExistError = require("../error/fileExistError");
 
 const validate = [
   body("foldername")
@@ -45,7 +46,9 @@ const postDeleteFolder = async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    throw new FileExistError(
+      "You alreadly have files in this folder. We could only delete empty folders!",
+    );
   }
   res.redirect("/");
 };
