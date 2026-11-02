@@ -1,4 +1,4 @@
-const signUpView = "sign-up";
+const signUpView = "sign-upVibe";
 const { body, matchedData, validationResult } = require("express-validator");
 const prisma = require("../lib/prisma");
 const bcrypt = require("bcryptjs");

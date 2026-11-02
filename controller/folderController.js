@@ -1,7 +1,7 @@
 const { body, matchedData, validationResult } = require("express-validator");
-const addFolderView = "addFolder";
-const updateFolderView = "updateFolder";
-const filesView = "files";
+const addFolderView = "addFolderVibe";
+const updateFolderView = "updateFolderVibe";
+const filesView = "filesVibe";
 const prisma = require("../lib/prisma");
 const FileExistError = require("../error/fileExistError");
 

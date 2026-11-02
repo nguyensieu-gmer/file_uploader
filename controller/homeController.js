@@ -1,5 +1,5 @@
 const prisma = require("../lib/prisma");
-const homeView = "home";
+const homeView = "homeVibe";
 
 const getHome = [
   (req, res, next) => {

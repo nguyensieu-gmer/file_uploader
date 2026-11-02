@@ -1,4 +1,4 @@
-const logInView = "log-in";
+const logInView = "log-inVibe";
 const passport = require("../config/passport");
 
 const getLogIn = (req, res) => {
@@ -15,7 +15,7 @@ const getFailure = (req, res) => {
   const messages = req.session.messages || [];
   const error = messages.pop();
 
-  res.render("log-in", { error });
+  res.render(logInView, { error });
 };
 
 module.exports = {

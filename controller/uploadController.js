@@ -1,4 +1,4 @@
-const uploadFileView = "uploadFile";
+const uploadFileView = "uploadFileVibe";
 const upload = require("../lib/multer");
 const prisma = require("../lib/prisma");
 const fs = require("node:fs/promises");
