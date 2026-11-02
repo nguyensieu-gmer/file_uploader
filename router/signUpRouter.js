@@ -6,6 +6,8 @@ const prisma = require("../lib/prisma");
 const bcrypt = require("bcryptjs");
 const passport = require("../config/passport");
 
+const signUpController = require("../controller/signUpController");
+
 const validation = [
   body("username")
     .trim()
@@ -27,38 +29,7 @@ const validation = [
     ),
 ];
 
-signUpRouter.get("/", (req, res) => {
-  res.render(signUpView);
-});
-
-signUpRouter.post(
-  "/",
-  validation,
-  async (req, res, next) => {
-    const result = validationResult(req);
-    if (!result.isEmpty()) {
-      return res.status(400).render(signUpView, { errors: result.array() });
-    }
-    const { username, useremail, password } = matchedData(req);
-    try {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      await prisma.user.create({
-        data: {
-          name: username,
-          email: useremail,
-          password: hashedPassword,
-        },
-      });
-    } catch (e) {
-      return next(e);
-    }
-    next();
-  },
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/",
-    failureMessage: true,
-  }),
-);
+signUpRouter.get("/", signUpController.getSignUp);
+signUpRouter.post("/", signUpController.postSignUp);
 
 module.exports = signUpRouter;
