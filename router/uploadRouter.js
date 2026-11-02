@@ -7,7 +7,7 @@ const fs = require("node:fs/promises");
 const path = require("node:path");
 const FileExistErorr = require("../error/fileExistError");
 const cloudinary = require("../config/cloudinary");
-const checkFileSize = require("../lib/checkFileSize");
+const checkFileSize = require("../config/checkFileSize");
 
 const deleteLocalFile = async (filePath) => {
   try {
