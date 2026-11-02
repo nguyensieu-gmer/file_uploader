@@ -27,7 +27,7 @@ const folderRouter = require("./router/folderRouter");
 const homeController = require("./controller/homeController");
 const logOutController = require("./controller/logOutController");
 
-const authErrorView = "authError";
+const authErrorView = "authErrorVibe";
 
 // set up session store
 const sessionStore = new PrismaSessionStore(prisma, {
