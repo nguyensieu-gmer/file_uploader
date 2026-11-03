@@ -1,7 +1,7 @@
 # file_uploader
 
 - this is can be used as mini google drive. To save file and CRUD folder.
-- main feature: Cookie and session, authetication, cloudinary for uploading files
+- main feature: Cookie and session, authetication, cloudinary for uploading, viewing and downloading files.
 
 # environment variables needed
 
